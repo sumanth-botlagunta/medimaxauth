@@ -8,7 +8,7 @@ app.use(cors());
 
 const Authcontroller = require("./authentication/authcontroller");
 
-app.use('api/auth', Authcontroller);
+app.use('api/authentication', Authcontroller);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
