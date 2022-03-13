@@ -1,0 +1,28 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "description": "authentication to medimax",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumanth-botlagunta/medimaxauth.git"
+  },
+  "keywords": [
+    "authentication",
+    "medimax",
+    "login",
+    "register"
+  ],
+  "author": "sumanth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sumanth-botlagunta/medimaxauth/issues"
+  },
+  "homepage": "https://github.com/sumanth-botlagunta/medimaxauth#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
