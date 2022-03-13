@@ -4,7 +4,7 @@
   "description": "authentication to medimax",
   "main": "index.js",
   "scripts": {
-    "test": "npm run dev"
+    "test": "node index.js"
   },
   "repository": {
     "type": "git",

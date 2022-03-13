@@ -10,5 +10,5 @@ var userSchema = new mongoose.Schema({
   qualification: String,
 });
 
-mongooose.model("users", userSchema);
+mongoose.model("users", userSchema);
 module.exports = mongoose.model("users");
