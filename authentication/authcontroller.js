@@ -10,12 +10,10 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.get("/users", function (req, res) {
-  User.find({}, function (err, users) {
-    if (err) {
-      res.send(err);
-    }
-    res.json(users);
-  });
+  User.find({},(err,result) => {
+    if(err) throw err;
+    res.send(result)
+})
 });
 
 router.post("/register", (req, res) => {
