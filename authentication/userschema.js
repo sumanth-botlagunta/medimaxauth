@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var userschema = new mongoose.Schema({
+var userSchema = new mongoose.Schema({
   username: String,
   name: String,
   email: String,
@@ -10,5 +10,5 @@ var userschema = new mongoose.Schema({
   qualification: String,
 });
 
-mongooose.model("users", userschema);
+mongooose.model("users", userSchema);
 module.exports = mongoose.model("users");
