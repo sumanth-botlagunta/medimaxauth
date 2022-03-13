@@ -37,40 +37,18 @@ router.post("/register", (req, res) => {
   );
 });
 
-router.post("/login", (req, res) => {
-  User.findOne(
-    {
-      username: req.body.username,
-    },
-    function (err, user) {
-      if (err) {
-        res.status(500).send(err);
+router.post('/login',(req,res) => {
+  User.findOne({username: req.body.username},(err,user) => {
+      if(err) return res.status(500).send("Error")
+      if(!user) return res.status(500).send({auth:false,token:'No user Found'})
+      else{
+          const passIsValid = bcrypt.compareSync(req.body.password, user.password)
+          if(!passIsValid) return res.status(500).send({auth:false,token:'Invalid password'})
+          var token = jwt.sign({id:user._id}, config.secret, {expiresIn:86400})
+          res.send({auth:true,token:token})
       }
-      if (!user) {
-        res.status(401).send("Authentication failed. User not found.");
-      } else if (user) {
-        if (!bcrypt.compareSync(req.body.password, user.password)) {
-          res.status(401).send("Authentication failed. Wrong password.");
-        } else {
-          var token = jwt.sign(
-            {
-              id: user._id,
-            },
-            config.secret,
-            {
-              expiresIn: 86400,
-            }
-          );
-          res.json({
-            success: true,
-            message: "Enjoy your token!",
-            token: token,
-          });
-        }
-      }
-    }
-  );
-});
+  })
+})
 
 router.get("/userinfo", function (req, res) {
   var token = req.headers["x-access-token"];
