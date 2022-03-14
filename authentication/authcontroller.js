@@ -57,33 +57,36 @@ router.post('/login', async (req, res) => {
   // })
 
 
-  const user = await User.findOne({
+   User.findOne({
 		email: req.body.email,
-	})
+	},(err, user) => {
+    if (err) return res.status(109).send('Error on the server.')
+    if (!user) {
+      return { status: 'error', error: 'Invalid login' }
+    }
+  
+    const isPasswordValid = bcrypt.compareSync(
+      req.body.password,
+      user.password
+    )
+  
+    if (isPasswordValid) {
+  var token = jwt.sign(
+        {
+          email: user.email
+          
+        },
+        config.secret,
+        { expiresIn: 86400 }
+      )
+  
+      return res.json({ status: 'ok', user: token })
+    } else {
+      return res.json({ status: 'error', user: false })
+    }
+  })
 
-	if (!user) {
-		return { status: 'error', error: 'Invalid login' }
-	}
-
-	const isPasswordValid = bcrypt.compareSync(
-		req.body.password,
-		user.password
-	)
-
-	if (isPasswordValid) {
-var token = jwt.sign(
-			{
-				email: user.email
-				
-			},
-			config.secret,
-      { expiresIn: 86400 }
-		)
-
-		return res.json({ status: 'ok', user: token })
-	} else {
-		return res.json({ status: 'error', user: false })
-	}
+	
 
 })
 
