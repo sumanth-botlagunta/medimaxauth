@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
     res.send("<h1>Hello welcome to authapi</h1>");
   });
 
-app.use('api/authentication', Authcontroller);
+app.use('/api/authentication', Authcontroller);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
